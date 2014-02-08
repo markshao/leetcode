@@ -4,6 +4,7 @@ package leetcode.oj.maxPointOnALine;
 
 public class Solution {
 
+	
 	public int maxPoints(Point[] points) {
 		if (points == null || points.length == 0) {
 			return 0;
