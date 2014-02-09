@@ -1,13 +1,15 @@
 package leetcode.oj.wordLadder;
 
 import java.util.HashSet;
+import java.util.Set;
 
 //http://oj.leetcode.com/problems/word-ladder/
 
 public class Solution {
 
 	static int count = 0;
-
+	static Set<String> duplicated = new HashSet<String>();
+	
 	public int ladderLength(String start, String end, HashSet<String> dict) {
 		ladder(start, end, dict, new HashSet<String>());
 		return count;
@@ -23,6 +25,10 @@ public class Solution {
 				count = c;
 		} else {
 			for (String s : dict) {
+				if (duplicated.contains(s))
+					continue;
+				else
+					duplicated.add(s);
 				if (cmp(start, s) == 1) {
 					HashSet<String> newdict = (HashSet<String>) dict.clone();
 					newdict.remove(s);
