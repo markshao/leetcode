@@ -29,6 +29,7 @@ public class BaseObjectLockTest {
         new Thread("Thread-2") {
             public void run() {
                 synchronized (readLock) {
+
                     System.out.println(this.getName() + " get the lock");
                     try {
                         readLock.notify();
