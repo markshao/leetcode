@@ -16,6 +16,7 @@ public class BaseConditionTest {
 					System.out.println("I get the lock");
 					condition.await();
 					System.out.println("I am back");
+                    condition.signal();
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				} finally {
@@ -29,7 +30,8 @@ public class BaseConditionTest {
 				try {
 					lock.lock();
 					System.out.println("U get the lock");
-					condition.signalAll();
+					condition.signal();
+                    condition.await();
 					Thread.sleep(3000);
 					System.out.println("U am back");
 				} catch (InterruptedException e) {
