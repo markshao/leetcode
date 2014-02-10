@@ -2,7 +2,6 @@ package leetcode.oj.triangle;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Deque;
 
 /**
  * Created by mark on 2/10/14.
