@@ -8,61 +8,21 @@ import java.util.ArrayList;
  */
 
 public class Solution {
-    static int sum = 0;
 
     public int minimumTotal(ArrayList<ArrayList<Integer>> triangle) {
-        Node head = convertToTree(triangle);
-        getMaxSumByPath(head,0);
-        return sum;
-    }
+        int[][] data = new int[triangle.size()][triangle.size()];
+        int length = triangle.size();
 
-    public void getMaxSumByPath(Node node,int newValue) {
-        if (node.left == null && node.right == null) {
-            int newSum = newValue + node.val;
-            if (sum == 0)
-                sum = newSum;
-            else if (sum < newSum)
-                sum = newSum;
-        } else if (node.left != null) {
-            getMaxSumByPath(node.left,newValue+node.val);
-        } else if (node.right != null) {
-            getMaxSumByPath(node.right,newValue+node.val);
+        for (int i = 0; i < length; i++) {
+            data[length - 1][i] = triangle.get(length - 1).get(i);
         }
-    }
 
-    public Node convertToTree(ArrayList<ArrayList<Integer>> triangle) {
-        int height = triangle.size();
-        ArrayDeque<Node> queue = new ArrayDeque<Node>();
-        Node cnode = new Node(triangle.get(0).get(0), 0, 0);
-        Node head = cnode;
-        queue.addLast(cnode);
-        while (!queue.isEmpty()) {
-            Node node = queue.poll();
-            if (node.i == height - 1) {
-                continue;
-            } else {
-                Node left = new Node(triangle.get(node.i + 1).get(node.j), node.i + 1, node.j);
-                Node right = new Node(triangle.get(node.i + 1).get(node.j + 1), node.i + 1, node.j + 1);
-                node.left =left;
-                node.right = right;
-                queue.addLast(left);
-                queue.addLast(right);
+        for (int j = length - 2; j > -1; j--) {
+            for (int k = 0; k <= j; k++) {
+                data[j][k] = triangle.get(j).get(k) + Math.min(data[j + 1][k], data[j + 1][k + 1]);
             }
         }
-        return head;
+        return data[0][0];
     }
 
-    class Node {
-        public Node(int val, int i, int j) {
-            this.val = val;
-            this.i = i;
-            this.j = j;
-        }
-
-        int val;
-        int i;
-        int j;
-        Node left = null;
-        Node right = null;
-    }
 }
