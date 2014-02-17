@@ -1,19 +1,18 @@
 package leetcode.oj.maxmiumSubArray;
 
 public class Solution {
-	public int maxSubArray(int[] A) {
-		int res = A[0];
-		int length = A.length;
-		int[][] data = new int[length][length];
+    public int maxSubArray(int[] A) {
+        int ans = 0, maxn = Integer.MIN_VALUE;
+        for (int i = 0; i < A.length; i++) {
+            if (ans < 0) ans = 0;
+            ans += A[i];
+            maxn = Math.max(maxn, ans);
+        }
+        return maxn;
+    }
 
-		for (int i = 0; i < length; i++) {
-			data[i][0] = A[i];
-		}
-
-		for (int i = 1; i < length; i++) {
-
-		}
-
-		return res;
-	}
+    public static void main(String[] args) {
+        int[] A = {1, 2, -1, -2, 2, 1, -2, 1, 4, -5, 4};
+        System.out.println(new Solution().maxSubArray(A));
+    }
 }
