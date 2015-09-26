@@ -7,15 +7,14 @@ def moveZeroes(nums):
     :rtype: void Do not return anything, modify nums in-place instead.
     """
     length = len(nums)
-    count = 0
-    for i, val in enumerate(nums):
-        if val == 0:
+    count = i = 0
+    while count < length:
+        if nums[i] != 0:
+            i += 1
+        else:
             nums.pop(i)
             nums.append(0)
-        if count == length:
-            break
-        else:
-            count += 1
+        count += 1
 
 
 if __name__ == "__main__":
